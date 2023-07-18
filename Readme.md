@@ -20,6 +20,14 @@ The data should be integrated into a txt file containing many lines, with each l
 "prompt": "entitiy_type"
 }
 ```
+NER example
+```
+{
+"content": "In other violence, a Palestinian worker was shot dead in the Gaza Strip and in the West Bank, another Palestinian, a teenager, was shot by Israeli soldiers during clashes.", 
+"result_list": [{"text": "West Bank", "start": 17, "end": 19}, {"text": "Gaza Strip", "start": 12, "end": 14}], 
+"prompt": "location"
+}
+```
 
 2.RE:
 
@@ -43,6 +51,24 @@ The data should be integrated into a txt file containing many lines, with each l
 "content": "sentence", 
 "result_list": [{"text": "object1", "start": start_index, "end": end_index}, {"text": "object2", "start": start_index, "end": end_index}], 
 "prompt": "subject ## relation_type"
+}
+```
+RE example
+```
+{
+"content": "we 've got a strong charter school movement that i signed the legislation to get started in the state of texas.", 
+"result_list": [{"text": "i", "start": 9, "end": 10}], 
+"prompt": "subject"
+}
+{
+"content": "we 've got a strong charter school movement that i signed the legislation to get started in the state of texas.", 
+"result_list": [{"text": "state", "start": 18, "end": 19}], 
+"prompt": "object"
+}
+{
+"content": "we 've got a strong charter school movement that i signed the legislation to get started in the state of texas.", 
+"result_list": [{"text": "state", "start": 18, "end": 19}], 
+"prompt": "i ## employee-organization"
 }
 ```
 
@@ -90,6 +116,29 @@ or
 "prompt": "opinion aspect's Sentiment classification [negative, neutral, positive]"
 }
 ```
+ASTE example
+```
+{
+"content": "Boot time is super fast, around anywhere from 35 seconds to 1 minute.", 
+"result_list": [{"text": "Boot time", "start": 0, "end": 2}], 
+"prompt": "Aspect"
+}
+{
+"content": "Boot time is super fast, around anywhere from 35 seconds to 1 minute.", 
+"result_list": [{"text": "fast", "start": 4, "end": 5}], 
+"prompt": "Opinion"
+}
+{
+"content": "Boot time is super fast, around anywhere from 35 seconds to 1 minute.", 
+"result_list": [{"text": "fast", "start": 4, "end": 5}], 
+"prompt": "Boot time's opinion"
+}
+{
+"content": "Boot time is super fast, around anywhere from 35 seconds to 1 minute.", 
+"result_list": [{"text": "positive", "start": -3, "end": -2}], 
+"prompt": "fast Boot time's Sentiment classification [negative, neutral, positive]"
+}
+```
 
 # Start training:
 ```
@@ -107,7 +156,7 @@ python finetune.py \
     --valid_steps 400 \
     --device "gpu" \
     --max_model_num 5\
-    --gd_weight 0.01\
+    --fsl_weight 0.01\
     --base_weight 1\
     --tokenizer "./FSUIE_tokenizer"
 ```
