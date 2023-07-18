@@ -1,6 +1,6 @@
 from utils import IEDataset, tqdm, get_bool_ids_greater_than, logger
 from transformers import BertTokenizerFast
-from sparse_attn_model import UIE
+from sparse_attn_model import UIEM
 # from model import UIE
 import torch
 from torch.utils.data import DataLoader
